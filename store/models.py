@@ -8,18 +8,6 @@ from django.urls import reverse
 
 
 
-# class Cart(models.Model):
-#     cart_id = models.CharField(max_length=255, blank=True)
-#     date_added = models.DateTimeField(auto_now_add=True)
-
-#     def __str__(self):
-#         return self.cart_id
-
-#     class Meta:
-#         db_table = 'cart'
-#         ordering = ('date_added', )
-#         verbose_name = 'ตระกร้าสินค้า'
-#         verbose_name_plural = "ตระกร้าสินค้า"
 
 class ProductManager(models.Manager):
     def get_queryset(self):
@@ -103,12 +91,6 @@ class Product(models.Model):
         return "%s %s %s %s %s %s"%(self.pk, self.title, self.quantity, self.price, self.color, self.size)
  
 
-
-
-
-
-
-
 class Profile(models.Model):
     user = models.OneToOneField(User , on_delete=models.CASCADE, unique=True, null=True, blank=True)
     Firstname = models.CharField(max_length=50, null=True)
@@ -131,9 +113,6 @@ def update_profile_signal(sender, instance, created, **kwargs):
         print('update_profile_signal: create a profile')
 
 
-
-
-
 class Purchase(models.Model):
     PAYCHOICE = [
         ("Promptpay" , "Promptpay"), 
@@ -141,15 +120,11 @@ class Purchase(models.Model):
         ]  
     product = models.ForeignKey('Product', on_delete=models.CASCADE, null=True)
     profile = models.ForeignKey('Profile', on_delete=models.CASCADE, null=True)
-    # cart = models.ForeignKey(Cart, on_delete=models.CASCADE, null=True)
     quantity = models.PositiveIntegerField(default=1)
     coupon = models.CharField(max_length=20)
     payment = models.CharField(max_length=30, choices = PAYCHOICE, default="Promptpay")
 
-    # class Meta:
-    #     db_table = 'cartItem'
-    #     verbose_name = 'รายการสินค้าในตระกร้าสินค้า'
-    #     verbose_name_plural = "รายการสินค้าในตระกร้าสินค้า"
+
 
     def __str__(self):
         return str(self.profile)

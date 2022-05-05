@@ -104,7 +104,7 @@ def mycart (request):
         listprice.append((b['price']))
     items = list(map(lambda id: Product.objects.get(pk=id), listpk))
     items = zip(items, listquantity, listprice)
-    context = {'wacity':items, "total_price":sum(listprice)}
+    context = {'wacity':items, "total_price":float(sum(listprice)), "mo":"0863624849"}
     
     return render(request, 'store/products/mycart.html', context)
 
@@ -238,6 +238,7 @@ from PIL import Image
 import libscrc
 import qrcode
 
+
 def calculate_crc(code):
     crc = libscrc.ccitt_false(str.encode(code))
     crc = str(hex(crc))
@@ -262,7 +263,7 @@ def gen_code(mobile="", nid="", amount=1.23):
     return code
 
 def get_qr(request,mobile="",nid="",amount=""):
-    message="mobile: %s, nid: %s, amount: %s"%(request.mobile,request.nid,request.amount)
+    message="mobile: %s, nid: %s, amount: %s"%(mobile,nid,amount)
     print( message )
     code=gen_code(mobile=mobile, amount=float(amount))#scb
     print(code)
@@ -271,13 +272,7 @@ def get_qr(request,mobile="",nid="",amount=""):
     img.save(response, "PNG")
     return response
 
-def checkout(request):
-    # context={
-    #     "mobile":"0854151951", #seller's mobile
-    #     "amount": 2.81619
-    # }
-    amount = 2.81619
-    context={"total_price":amount, "mobile":"0854151951"}
-    return render(request, 'store/products/checkout.html', context)
+
+
 
 

@@ -47,17 +47,18 @@
 
 <div class="container-fluid pt-5" ></div>
 {% if total_price != 0 %}
-<img src="{% url 'store:qr' 'mobile: request.mobile' 'amount:request.total_price' %}"height='400' style="margin-left: 60px;">
-
+<img src="{% url 'store:qr' mobile=mo amount=total_price %}"height='400' style="margin-left: 60px;">
 {% endif %}
 <h5 style="text-align: left; margin-left: 60px;">Promtpay:097-294-4091</h5>
 <h5 style="text-align: left; margin-left: 60px;">Sirintorn Phachai</h5>
 <h1> </h1>
 </div>
 
-<button class="button" style="background-color: #DA8751; color: white; border: none; width: 150px; height: 50px; border-radius: 5px; margin-left: 83%; margin-bottom: 20px; ">status</button>
-<button class="button button2" style="background-color: #DA8751; color: white; border: none; width: 150px; height: 50px; border-radius: 5px; margin-left: 83%; margin-bottom: 20px;">Confirm</button>
+<form action="http://127.0.0.1:8000/">
+    
 
+<button class="button button2" style="background-color: #DA8751; color: white; border: none; width: 150px; height: 50px; border-radius: 5px; margin-left: 83%; margin-bottom: 20px;">Confirm</button>
+</form>
 {% endblock %}
 
 

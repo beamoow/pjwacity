@@ -14,6 +14,7 @@ Including another URLconf
 """
 
 from django.urls import path
+from store.views import *
 from store import views
 
 from django.contrib.auth import views as auth_views
@@ -37,5 +38,4 @@ urlpatterns = [
     path('minuscart', views.minuscart, name='minuscart'),
     path('qr_mobile/<mobile>/<amount>/qr.png', views.get_qr, name='qr'),
     path('qr_nid/<nid>/<amount>/', views.get_qr, name='qr'),
-    path('checkout/',views.checkout, name='checkout'),
 ]
