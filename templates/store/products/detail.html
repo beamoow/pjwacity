@@ -1,0 +1,89 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block content %}
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<style>
+
+.container{
+    margin-top: 100px;
+    margin-left: 300px;
+}
+
+.img-fluid{
+      object-fit: fill;
+      float: none;
+      width: 360px;
+      height: 400px;
+    }
+    .checked {
+        color: orange;
+    }
+</style>
+
+<div class="container">
+
+{% block title %}
+{{ product.name }}
+{% endblock %}
+    <main class="pt-5">
+        <div class="row g-3">
+            <div class="card shadow-sm" style="margin-left: 100px; margin-right: 13px;">
+                <img class="img-fluid" alt="Responsive image" src="{{ product.picture.url }}" >
+              </div>
+            <div class="col-md-7 col-lg-7 ps-md-3 ps-lg-5">
+                <h1 class="mb-0 h4">{{ product.title }}</h1>
+                <br>
+                <p><span class="lead">Seller Name : {{ product.seller }}</span> </p>
+                <p>{{ product.description|slice:":260" }}</p>
+                <div class="border" style="margin-right: 300px ; ">
+                    <div class="col border-bottom ">
+                        <div class="row mx-md-n6" style="height: 50px; padding-top: 10px;">
+                         
+                            <div class="col-6 text-end"><span class="h4 fw-bold">Price </span></div>
+                            <div class="col-6 text-end"><span class="h4 fw-bold">{{ product.price }} ฿</span></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="border" style="margin-top: 15px; margin-right: 150px; padding-left: 15px;">
+                    <div class="row mx-md-n5"style="height: 40px; padding-top: 9px;">
+                        <div class="col mx-md-n5">color : {{ product.color }} </div>
+                        <div class="col mx-md-n5"> Size: {{product.size}} </div>
+                        <div class="col mx-md-n5">Quantity:{{product.quantity}}</div>
+                    </div>
+
+
+                </div>
+                <br>
+                <form action="{% url 'store:item' %}" method="post"> 
+                    {% csrf_token %}    
+                    <input type="hidden" name="pk" value="{{product.pk}}">
+                    <input type="hidden" name="price" value="{{product.price}}">
+
+                    <input type="submit" value="Add to cart" class="uk-button uk-button-default" style="background-color: #DA8751; color: white; border: none; width: 150px; height: 50px; border-radius: 5px;">
+                </form>
+
+            </div>
+
+        </div>
+        <br>
+        <br>
+        <h3 class="my-3"style="margin-left: 200px;">Reviews - <span class="avg-rating" >{{avg_reviews.avg_rating}}</span>/5.0 <i class="fa fa-star checked"></i>
+        </h3>
+        <div class="border " style="margin-left: 200px; margin-right: 200px; padding-left: 20px; padding-top: 15px; margin-bottom: 50px;padding-bottom: 15px; padding-right: 20px;">
+         {{ product.description | slice:350}}
+
+    </main>
+
+</div>
+
+
+
+
+{% endblock %}
+
+

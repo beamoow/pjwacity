@@ -1,0 +1,44 @@
+{% extends "store/base2.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+    <h1 style="margin-left: 50px; margin-top: 20px;">Profile, {{user}}</h1>
+    <br>
+    <br>
+    <form action="{% url 'store:profile' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-row" style="margin-left: 200px; margin-right: 200px;">
+            <div class="form-group col-md-6 mb-0">
+              {{ form.Firstname|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+              {{ form.Lastname|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.email|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-6 mb-0">
+                {{ form.DOB|as_crispy_field }} 
+              </div>
+              <div class="form-group col-md-6 mb-0">
+                {{ form.address|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-6 mb-0">
+                {{ form.city|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-6 mb-0">
+                {{ form.country|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-6 mb-0">
+                {{ form.zipcode|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-6 mb-0">
+                {{ form.tel|as_crispy_field }}
+              </div>
+        </div>
+
+        <input type="submit" value="Confirm" style="background-color: #DA8751; color: white; border: none; width: 100px; height: 50px; border-radius: 5px; margin-left: 1230px;">
+    </form>
+{% endblock %}
